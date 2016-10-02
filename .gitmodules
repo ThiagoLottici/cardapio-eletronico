@@ -1,0 +1,3 @@
+[submodule "cardapio-eletronico-server"]
+	path = cardapio-eletronico-server
+	url = https://git.heroku.com/cardapio-eletronico-server.git
