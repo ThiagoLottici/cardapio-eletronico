@@ -8,6 +8,9 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONStringer;
@@ -18,6 +21,8 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Thiago on 05/10/2016.
@@ -26,6 +31,7 @@ public class RetrievePedidosTask extends AsyncTask<Void, Void, String> {
 
     private Exception exception;
     public MainActivity activity;
+    Gson gson = new Gson();
     ProgressBar progressBar;
     TextView responseView;
 
@@ -76,13 +82,14 @@ public class RetrievePedidosTask extends AsyncTask<Void, Void, String> {
             JSONObject mPedidos = new JSONObject(response);
             JSONArray pedidosList = mPedidos.getJSONArray("pedidos");
 
-            for(int i=0;i < pedidosList.length();i++){
-                activity.pedidosArray.add(pedidosList.getJSONObject(i));
+            activity.pedidosArray = gson.fromJson(pedidosList.toString(), new TypeToken<List<Pedido>>(){}.getType());
+            String ret = "";
+            for (Pedido p : activity.pedidosArray) {
+                ret = ret + p.getID() + " " + p.getCriacao()+ " " + p.getStatus() + "\n";
             }
-
             progressBar.setVisibility(View.GONE);
-            Log.i("INFO", response);
-            responseView.setText(response);
+            Log.i("INFO", ret);
+            responseView.setText(ret);
         } catch (JSONException e)
         {
             
