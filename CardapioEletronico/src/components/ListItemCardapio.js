@@ -1,22 +1,33 @@
 import React, { Component } from 'react';
 import { Text, TouchableWithoutFeedback, View } from 'react-native';
-import { Actions } from 'react-native-router-flux';
+import axios from 'axios';
 import { CardSection } from './common';
 
 class ListItem extends Component {
   onRowPress() {
-    Actions.employeeEdit({ employee: this.props.employee });
+    console.log(this.props.prato.Id);
+    axios.post('https://cardapioteste.herokuapp.com/', {
+        id: this.props.prato.Id
+    })
+    .then( response => {/
+      console.log(response);
+    })
+    .catch( error => {
+      console.log(error);
+    });
   }
 
   render() {
-    const { name } = this.props.employee;
-
+    const { Name, Ingredientes} = this.props.prato;
     return (
       <TouchableWithoutFeedback onPress={this.onRowPress.bind(this)}>
         <View>
-          <CardSection>
+          <CardSection style={styles.cardapioStyle}>
             <Text style={styles.titleStyle}>
-              {name}
+              {Name}
+            </Text>
+            <Text>
+              { Ingredientes }
             </Text>
           </CardSection>
         </View>
@@ -29,6 +40,9 @@ const styles = {
   titleStyle: {
     fontSize: 18,
     paddingLeft: 15
+  },
+  cardapioStyle: {
+    flexDirection: 'column'
   }
 };
 
