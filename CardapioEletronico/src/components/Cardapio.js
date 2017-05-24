@@ -22,7 +22,6 @@ class Cardapio extends Component {
 	}
 
 	renderRow(prato) {
-		console.log(prato);
 		return (
 			<ListItemCardapio
 				prato={prato}
@@ -41,7 +40,7 @@ class Cardapio extends Component {
 	}
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
 	return { cardapio: state.cardapio };
 };
 

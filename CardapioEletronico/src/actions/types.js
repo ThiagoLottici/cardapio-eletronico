@@ -8,3 +8,6 @@ export const CREATE_USER_SUCCESS = 'create_user_success';
 export const CREATE_USER_FAIL = 'create_user_fail';
 
 export const CARDAPIO_FETCH_SUCCESS = 'cardapio_fetch_success';
+export const OBSERVATIONS_CHANGED = 'observations_changed';
+
+export const REGISTRA_PEDIDO_COMANDA = 'registra_pedido_comanda';

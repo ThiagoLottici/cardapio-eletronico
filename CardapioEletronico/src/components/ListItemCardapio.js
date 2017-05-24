@@ -1,30 +1,35 @@
 import React, { Component } from 'react';
 import { Text, TouchableWithoutFeedback, View } from 'react-native';
-import axios from 'axios';
+import { connect } from 'react-redux';
 import { CardSection } from './common';
+import { Actions } from 'react-native-router-flux';
 
-class ListItem extends Component {
+class ListItemCardapio extends Component {
+
   onRowPress() {
-    console.log(this.props.prato.Id);
+    /*console.log(this.props.prato.Id);
     axios.post('https://cardapioteste.herokuapp.com/', {
         id: this.props.prato.Id
     })
-    .then( response => {/
+    .then(response => {
       console.log(response);
     })
-    .catch( error => {
+    .catch(error => {
       console.log(error);
-    });
+    });*/
+    //this.setState({ showModal: !this.state.showModal });
+    Actions.dishDetail({ prato: this.props.prato });
   }
 
+
   render() {
-    const { Name, Ingredientes} = this.props.prato;
+    const { Name, Ingredientes } = this.props.prato;
     return (
       <TouchableWithoutFeedback onPress={this.onRowPress.bind(this)}>
         <View>
           <CardSection style={styles.cardapioStyle}>
             <Text style={styles.titleStyle}>
-              {Name}
+              { Name }
             </Text>
             <Text>
               { Ingredientes }
@@ -46,4 +51,9 @@ const styles = {
   }
 };
 
-export default ListItem;
+const mapStateToProps = (state) => {
+  console.log(state);
+  return state;
+};
+
+export default connect(mapStateToProps)(ListItemCardapio);
