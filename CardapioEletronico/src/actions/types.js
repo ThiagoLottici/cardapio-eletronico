@@ -11,3 +11,4 @@ export const CARDAPIO_FETCH_SUCCESS = 'cardapio_fetch_success';
 export const OBSERVATIONS_CHANGED = 'observations_changed';
 
 export const REGISTRA_PEDIDO_COMANDA = 'registra_pedido_comanda';
+export const REMOVE_PEDIDO_COMANDA = 'remove_pedido_comanda';

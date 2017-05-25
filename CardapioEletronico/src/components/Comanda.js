@@ -1,15 +1,24 @@
 import React, { Component } from 'react';
-import { ListView } from 'react-native';
+import { ListView, View, Text, Button } from 'react-native';
 import { connect } from 'react-redux';
-import ListItemPedidosToConfirm from './ListItemCardapio';
+import ListItemPedidosToConfirm from './ListItemPedidosToConfirm';
 
 class Comanda extends Component {
+
+  componentWillMount() {
+    //fetchComanda
+    this.createDataSource(this.props);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.createDataSource(nextProps);
+  }
 
   createDataSource({ comanda }) {
     const ds = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2
     });
-    this.dataSource = ds.cloneWithRows(comanda.pedidos);
+    this.dataSource = ds.cloneWithRows(comanda.comanda);
   }
 
   renderRow(pedido) {
@@ -22,11 +31,18 @@ class Comanda extends Component {
 
   render() {
     return (
-        <ListView
-         enableEmptySections
-         dataSource={this.dataSource}
-         renderRow={this.renderRow}
-         />
+      <View>
+        <Text>
+        Pedidos não confirmados:
+        </Text>
+        <View>
+            <ListView
+               enableEmptySections
+               dataSource={this.dataSource}
+               renderRow={this.renderRow}
+            />
+         </View>
+      </View>
       );
   }
 }

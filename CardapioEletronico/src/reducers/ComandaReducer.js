@@ -3,7 +3,7 @@ import {
 } from '../actions/types';
 
 const INITIAL_STATE = {
-  comanda: []
+  comanda: []  //pedidos
 };
 
 export default (state = INITIAL_STATE, action) => {

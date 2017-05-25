@@ -5,23 +5,26 @@ import { dishDetails, registrarPratoComanda } from '../actions';
 import { Actions } from 'react-native-router-flux';
 
 class DishDetail extends Component {
-    
-    componentWillMount() {
-      this.state = { count: 0 };
-    }
 
-    incrementCount = () => {
-      this.setState(prevState => ({ count: prevState.count + 1 }));
-    }
-
-    decrementCount = () => {
-      this.setState(prevState => ({ count: prevState.count - 1 }));
+    constructor(props) {
+      super(props);
+      this.state = { pedido: '' };
+      this.state.pedido = { prato: props.prato, observacao: '', quantidade: 0 };
     }
 
     onEnviarParaComandaButtonPress() {
-      this.props.prato.Observation = this.props.observation;
-      this.props.prato.Quantity = this.props.count;
-      this.props.registrarPratoComanda(this.props.prato);
+      this.props.registrarPratoComanda(this.state.pedido);
+      Actions.cardapio();
+    }
+
+    incrementCount = () => {
+      this.setState(prevState => 
+        ({ pedido: { ...this.state.pedido, quantidade: prevState.pedido.quantidade + 1 } }));
+    }
+
+    decrementCount = () => {
+      this.setState(prevState => 
+        ({ pedido: { ...this.state.pedido, quantidade: prevState.pedido.quantidade - 1 } }));
     }
     
 
@@ -35,8 +38,9 @@ class DishDetail extends Component {
             <TextInput
               multiline
               numberOfLines={4}
-              value={this.props.observation}
-              onChangeText={value => this.props.dishDetails({ prop: 'observation', value })}
+              value={this.state.pedido.observacao}
+              onChangeText={value => 
+                this.setState({ pedido: { ...this.state.pedido, observacao: value } })}
               style={styles.textInputStyle}
               />
           </View>
@@ -49,7 +53,7 @@ class DishDetail extends Component {
             onPress={() => this.incrementCount()}
             />
             <Text>
-              {this.state.count}
+              {this.state.pedido.quantidade}
             </Text>
             <Button 
             title="-"

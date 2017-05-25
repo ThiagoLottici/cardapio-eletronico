@@ -6,6 +6,7 @@ import CreateUserForm from './components/CreateUserForm';
 import Cardapio from './components/Cardapio';
 import DishDetail from './components/DishDetail';
 import TabIcon from './components/TabIcon';
+import Comanda from './components/Comanda';
 
 
 const getSceneStyle = (/* NavigationSceneRendererProps */ props, computedProps) => {
@@ -52,7 +53,7 @@ const RouterComponent = () => {
             title="Comanda"
             icon={TabIcon}
          >
-          <Scene key="cardapio2" component={Cardapio} title="Cardpáio" initial />
+          <Scene key="comanda" component={Comanda} title="Comanda" initial />
          </Scene>
        </Scene>
        </Scene>
