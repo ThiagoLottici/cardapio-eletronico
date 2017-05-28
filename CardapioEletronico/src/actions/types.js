@@ -12,3 +12,6 @@ export const OBSERVATIONS_CHANGED = 'observations_changed';
 
 export const REGISTRA_PEDIDO_COMANDA = 'registra_pedido_comanda';
 export const REMOVE_PEDIDO_COMANDA = 'remove_pedido_comanda';
+
+export const MESA_FETCH_SUCCESS = 'mesa_fetch_success';
+export const ON_MESA_NUM_CHANGE = 'on_mesa_num_change';

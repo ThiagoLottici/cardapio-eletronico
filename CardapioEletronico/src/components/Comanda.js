@@ -7,6 +7,7 @@ class Comanda extends Component {
 
   componentWillMount() {
     //fetchComanda
+    debugger;
     this.createDataSource(this.props);
   }
 
@@ -18,10 +19,10 @@ class Comanda extends Component {
     const ds = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2
     });
-    this.dataSource = ds.cloneWithRows(comanda.comanda);
+    this.dataSource = ds.cloneWithRows(comanda.pedidosList);
   }
 
-  renderRow(pedido) {
+  renderRow (pedido) {
     return (
       <ListItemPedidosToConfirm
         pedido={pedido}
@@ -29,11 +30,17 @@ class Comanda extends Component {
       );
   }
 
-  render() {
-    return (
-      <View>
-        <Text>
-        Pedidos não confirmados:
+  finalizarPedido() {
+    this.props.postPedido(this.props.pedidosList);
+  }
+
+  renderPedidosNaoConfirmados() {
+    const pedidosList = this.props.comanda.pedidosList;
+    if (pedidosList.length > 0) {
+      return (
+        <View>
+        <Text style={styles.textStyle}>
+          Pedidos não confirmados:
         </Text>
         <View>
             <ListView
@@ -42,8 +49,30 @@ class Comanda extends Component {
                renderRow={this.renderRow}
             />
          </View>
+         <Button 
+          title="Confirmar pedidos"
+          onPress={this.finalizarPedido.bind(this)}
+         />
+         </View>
+        );
+    } else {
+      return null;
+    }
+  }
+
+  render() {
+    return (
+      <View>
+        {this.renderPedidosNaoConfirmados()}
       </View>
       );
+  }
+}
+
+const styles = {
+  textStyle: {
+    padding: 2,
+    textDecorationLine: 'underline'
   }
 }
 

@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Text, View, TextInput, Button } from 'react-native';
 import { connect } from 'react-redux';
-import { dishDetails, registrarPratoComanda } from '../actions';
+import { registrarPratoComanda } from '../actions';
 import { Actions } from 'react-native-router-flux';
 
-class DishDetail extends Component {
+class DetalhesPedido extends Component {
 
     constructor(props) {
       super(props);
@@ -86,4 +86,4 @@ const styles = {
 }
      };
 
-export default connect(null, { dishDetails, registrarPratoComanda })(DishDetail);
+export default connect(null, { registrarPratoComanda })(DetalhesPedido);

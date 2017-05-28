@@ -4,7 +4,7 @@ import { Scene, Router } from 'react-native-router-flux';
 import LoginForm from './components/LoginForm';
 import CreateUserForm from './components/CreateUserForm';
 import Cardapio from './components/Cardapio';
-import DishDetail from './components/DishDetail';
+import DetalhesPedido from './components/DetalhesPedido';
 import TabIcon from './components/TabIcon';
 import Comanda from './components/Comanda';
 
@@ -46,7 +46,7 @@ const RouterComponent = () => {
             icon={TabIcon}
          >
           <Scene key="cardapio" component={Cardapio} title="Cardpáio" initial />
-          <Scene key="dishDetail" component={DishDetail} title="Detalhes do Prato" />
+          <Scene key="dishDetail" component={DetalhesPedido} title="Detalhes do Prato" />
          </Scene>
          <Scene
             key="comandaScene"
