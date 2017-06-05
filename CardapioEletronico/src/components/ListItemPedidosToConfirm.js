@@ -13,12 +13,11 @@ class ListItemPedidosToConfirm extends Component {
   }
 
   render() {
-    const pedido = this.props.pedido;
-    debugger;
+    const Item = this.props.ItemPedido.Item;
     return (
         <View style={styles.pedidosNaoConfirmadosStyle}>
           <Text>
-            {pedido.prato.Name}
+            {Item.Nome}
           </Text>
           <Button
             onPress={this.removeItem.bind(this)}

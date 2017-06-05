@@ -1,30 +1,30 @@
 import React, { Component } from 'react';
 import { Text, View, TextInput, Button } from 'react-native';
 import { connect } from 'react-redux';
-import { registrarPratoComanda } from '../actions';
+import { registrarItemPedidoComanda } from '../actions';
 import { Actions } from 'react-native-router-flux';
 
 class DetalhesPedido extends Component {
 
     constructor(props) {
       super(props);
-      this.state = { pedido: '' };
-      this.state.pedido = { prato: props.prato, observacao: '', quantidade: 0 };
+      this.state = { ItemPedido: '' };
+      this.state.ItemPedido = { Item: props.Item, Obs: '', Quantidade: 1 };
     }
 
     onEnviarParaComandaButtonPress() {
-      this.props.registrarPratoComanda(this.state.pedido);
+      this.props.registrarItemPedidoComanda(this.state.ItemPedido);
       Actions.cardapio();
     }
 
     incrementCount = () => {
       this.setState(prevState => 
-        ({ pedido: { ...this.state.pedido, quantidade: prevState.pedido.quantidade + 1 } }));
+        ({ ItemPedido: { ...this.state.ItemPedido, Quantidade: prevState.ItemPedido.Quantidade + 1 } }));
     }
 
     decrementCount = () => {
       this.setState(prevState => 
-        ({ pedido: { ...this.state.pedido, quantidade: prevState.pedido.quantidade - 1 } }));
+        ({ ItemPedido: { ...this.state.ItemPedido, Quantidade: prevState.ItemPedido.Quantidade - 1 } }));
     }
     
 
@@ -38,9 +38,9 @@ class DetalhesPedido extends Component {
             <TextInput
               multiline
               numberOfLines={4}
-              value={this.state.pedido.observacao}
+              value={this.state.ItemPedido.Obs}
               onChangeText={value => 
-                this.setState({ pedido: { ...this.state.pedido, observacao: value } })}
+                this.setState({ ItemPedido: { ...this.state.ItemPedido, Obs: value } })}
               style={styles.textInputStyle}
               />
           </View>
@@ -53,7 +53,7 @@ class DetalhesPedido extends Component {
             onPress={() => this.incrementCount()}
             />
             <Text>
-              {this.state.pedido.quantidade}
+              {this.state.ItemPedido.Quantidade}
             </Text>
             <Button 
             title="-"
@@ -86,4 +86,4 @@ const styles = {
 }
      };
 
-export default connect(null, { registrarPratoComanda })(DetalhesPedido);
+export default connect(null, { registrarItemPedidoComanda })(DetalhesPedido);

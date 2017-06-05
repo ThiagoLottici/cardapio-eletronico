@@ -1,39 +1,52 @@
 import React, { Component } from 'react';
-import { ListView, View, Picker } from 'react-native';
+import { View, Picker, Button } from 'react-native';
 import { connect } from 'react-redux';
-import { mesasFetch } from '../actions';
+import { mesasFetch, selecionarMesaPost, onMesaNumChange } from '../actions';
+import { Spinner, CardSection } from './common';
 
 class Mesas extends Component {
   componentWillMount() {
     this.props.mesasFetch();
   }
-
   componentWillReceiveProps(nextProps) {
-    renderPickerItem(nextProps.mesas);
-  }
-
-  renderPickerItem(mesas) {
-      this.mesasPickerItens = mesas.map( (s, i) => {
-        return <Picker.Item key={i} value ={s} label={s} />
-    });
+    this.renderPickerItem(nextProps.mesas);
   }
 
   onSelecionarMesaButtonPress() {
-    this.props.selecionarMesaPost(this.props.mesaNum);
+    this.props.selecionarMesaPost(this.props.mesas.mesaNum || 1);
+  }
+
+  renderPickerItem({ mesas }) {
+      this.mesasPickerItens = mesas.map((value) => {
+      return (<Picker.Item key={value.NumMesa} value={value.NumMesa} label={value.NumMesa.toString()} />);
+      });
+  }
+
+  renderButton() {
+    if (this.props.mesas.loading) {
+      return <Spinner size="large" />;
+    }
+
+    return (
+      <Button 
+          title="Selecionar Mesa"
+          onPress={this.onSelecionarMesaButtonPress.bind(this)}
+        />
+      );
   }
 
   render() {
     return (
       <View>
         <Picker
-          selectedValue={this.props.mesaNum}
-          onValueChange={(mesaNum) => this.props.onMesaNumChange({ mesaNum: mesaNum })}>
+          style={{ width: 100 }}
+          selectedValue={this.props.mesas.mesaNum}
+          onValueChange={(mesaNum) => this.props.onMesaNumChange({ mesaNum })}>
           {this.mesasPickerItens}
         </Picker>
-        <Button 
-          title="Selecionar Mesa"
-          onPress={this.onSelecionarMesaButtonPress.bind(this)}
-        />
+        <CardSection>
+          {this.renderButton()}
+        </CardSection>
       </View>
       );
   }

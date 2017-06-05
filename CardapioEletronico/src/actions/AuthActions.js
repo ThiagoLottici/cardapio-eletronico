@@ -61,7 +61,7 @@ const createUserSuccess = (dispatch, user) => {
     payload: user
   });
 
-  Actions.main();
+  Actions.mesas();
 };
 
 const loginUserFail = (dispatch) => {
@@ -74,5 +74,5 @@ const loginUserSuccess = (dispatch, user) => {
     payload: user
   });
 
-  Actions.main();
+  Actions.mesas();
 };

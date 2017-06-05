@@ -12,6 +12,11 @@ export const OBSERVATIONS_CHANGED = 'observations_changed';
 
 export const REGISTRA_PEDIDO_COMANDA = 'registra_pedido_comanda';
 export const REMOVE_PEDIDO_COMANDA = 'remove_pedido_comanda';
+export const PEDIDOS_CONFIRMADOS_FETCH_SUCCESS = 'pedidos_confirmados_fetch_success';
+export const ATUALIZA_PEDIDOS_CONFIRMADOS = 'atualiza_pedidos_confirmados';
 
 export const MESA_FETCH_SUCCESS = 'mesa_fetch_success';
 export const ON_MESA_NUM_CHANGE = 'on_mesa_num_change';
+export const SELECIONA_MESA = 'seleciona_mesa';
+export const SELECIONA_MESA_FAIL = 'seleciona_mesa_fail';
+export const SELECIONA_MESA_SUCCESS = 'seleciona_mesa_success';

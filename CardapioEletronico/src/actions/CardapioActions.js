@@ -7,7 +7,8 @@ import {
 
 export const cardapioFetch = () => {
   return (dispatch) => {
-    axios.get('https://cardapioteste.herokuapp.com/')
+    axios.get('http://me-server.herokuapp.com/cardapio')
+      //axios.get('http://192.168.0.7:3000/cardapio')
       .then(response => {
         dispatch({ type: CARDAPIO_FETCH_SUCCESS, payload: response.data });
     });

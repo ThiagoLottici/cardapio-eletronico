@@ -7,6 +7,7 @@ import Cardapio from './components/Cardapio';
 import DetalhesPedido from './components/DetalhesPedido';
 import TabIcon from './components/TabIcon';
 import Comanda from './components/Comanda';
+import Mesas from './components/Mesas';
 
 
 const getSceneStyle = (/* NavigationSceneRendererProps */ props, computedProps) => {
@@ -32,6 +33,8 @@ const RouterComponent = () => {
         <Scene key="login" component={LoginForm} title="Please Login" />
         <Scene key="createUser" component={CreateUserForm} title="Create User" />
       </Scene>
+
+      <Scene key="mesas" component={Mesas} title="Mesas" />
 
      <Scene key="main">
       <Scene 
