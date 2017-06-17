@@ -11,10 +11,12 @@
     "react": "16.0.0-alpha.6",
     "react-native": "0.44.2",
     "react-native-checkbox": "^1.1.0",
+    "react-native-message-bar": "^1.6.0",
     "react-native-router-flux": "^3.39.2",
     "react-redux": "^5.0.5",
     "redux": "^3.6.0",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "socket.io": "^2.0.3"
   },
   "devDependencies": {
     "babel-jest": "20.0.3",

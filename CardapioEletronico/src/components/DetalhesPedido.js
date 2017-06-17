@@ -14,7 +14,7 @@ class DetalhesPedido extends Component {
 
     onEnviarParaComandaButtonPress() {
       this.props.registrarItemPedidoComanda(this.state.ItemPedido);
-      Actions.cardapio();
+      Actions.cardapio({ pedidoEnviadoParaComanda: true });
     }
 
     incrementCount = () => {

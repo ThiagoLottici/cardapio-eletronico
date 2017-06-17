@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { ListView } from 'react-native';
+import { ListView, View, Text, TouchableWithoutFeedback } from 'react-native';
 import { connect } from 'react-redux';
 import ListItemPedidos from './ListItemPedidos';
-import { pedidosFetch } from '../actions';
+import { pedidosFetch, criaSocket } from '../actions';
 
 class Pedidos extends Component {
   componentWillMount() {
+    this.props.criaSocket();
     this.props.pedidosFetch();
     this.createDataSource(this.props);
   }
@@ -29,13 +30,37 @@ class Pedidos extends Component {
     );
   }
 
+  atualizaPedidos() {
+    
+  }
+
+  renderHaPedidosNovos() {
+    if (this.props.pedidos.temPedidosNovos) {
+    return (
+    <TouchableWithoutFeedback onPress={this.atualizaPedidos.bind(this)}>
+      <View style={{ height: 30 }}>
+        <Text>
+          Há pedidos novos, clique aqui para atualizar
+        </Text>
+      </View>
+    </TouchableWithoutFeedback>
+      );
+    }
+  return null;
+  }
+
   render() { 
-  return ( 
+  return (
+    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1 }}>
     <ListView
       enableEmptySections
       dataSource={this.dataSource}
       renderRow={this.renderRow}
     />
+    </View>
+      {this.renderHaPedidosNovos()}
+    </View>
     );
   }
 }
@@ -45,4 +70,4 @@ const mapStateToProps = (state) => {
 };
 
 
-export default connect(mapStateToProps, { pedidosFetch })(Pedidos);
+export default connect(mapStateToProps, { pedidosFetch, criaSocket })(Pedidos);

@@ -3,13 +3,16 @@ import axios from 'axios';
 import {
   REGISTRA_PEDIDO_COMANDA,
   PEDIDOS_CONFIRMADOS_FETCH_SUCCESS,
-  ATUALIZA_PEDIDOS_CONFIRMADOS
+  ATUALIZA_PEDIDOS_CONFIRMADOS,
+  REMOVE_ITEM_FROM_PEDIDOS_NAO_CONFIRMADOS
 } from './types';
 
 export const registrarItemPedidoComanda = (ItemPedido) => {
   const ItemPedidos = [];
   for (var index = 0; index < ItemPedido.Quantidade; index++) {
-    ItemPedidos.push(ItemPedido);
+    ItemPedido.Id = index;
+    const itemPedidoWithId = Object.assign({}, ItemPedido); 
+    ItemPedidos.push(itemPedidoWithId);
   }
   return {
     type: REGISTRA_PEDIDO_COMANDA,
@@ -17,31 +20,36 @@ export const registrarItemPedidoComanda = (ItemPedido) => {
   };
 };
 
-export const pedidosConfirmadosFetch = () => {
+export const pedidosConfirmadosFetch = (ComandaId) => {
+  debugger;
   return (dispatch) => {
-    axios.get('https://me-server.herokuapp.com/pedidos')
+    axios.get(`https://me-server.herokuapp.com/pedidos/comanda/${ComandaId}`)
     .then(response => {
-      console.log(response);
-      dispatch({ type: PEDIDOS_CONFIRMADOS_FETCH_SUCCESS, payload: response.data.ItemPedidos });
+      const item = [];
+      response.data.forEach(ItemPedidos => {
+        ItemPedidos.Item.forEach(value => 
+          item.push(value));
+      });
+      debugger;
+      dispatch({ type: PEDIDOS_CONFIRMADOS_FETCH_SUCCESS, payload: item });
     });
   };
 };
 
 export const postPedido = (comanda) => {
-  var pedidosNaoConfirmadosId = [];
+  const pedidosNaoConfirmadosId = [];
   comanda.pedidosNaoConfirmados.forEach(value => {
-    pedidosNaoConfirmadosId.push({ 'Item': value.Item.Id, 'Obs': value.Obs });
+    pedidosNaoConfirmadosId.push({ 'Item': value.Item, 'Obs': value.Obs });
   });
   debugger;
   return (dispatch) => {
     axios.post('https://me-server.herokuapp.com/pedidos/novo', {
-    //axios.post('http://192.168.0.7:3000/pedidos/novo', {
-      IdComanda: comanda.Id,
+      IdComanda: comanda.comanda.Id,
       ItemPedidos: pedidosNaoConfirmadosId
     })
     .then(response => atualizaPedidosConfirmados(dispatch, response))
     .catch((error) => {
-      console.log(error);
+      //console.log(error);
     });
   };
 };
@@ -52,4 +60,11 @@ const atualizaPedidosConfirmados = (dispatch, response) => {
     type: ATUALIZA_PEDIDOS_CONFIRMADOS,
     payload: response.data
   });
+};
+
+export const removeItem = (id) => {
+  return {
+    type: REMOVE_ITEM_FROM_PEDIDOS_NAO_CONFIRMADOS,
+    payload: id
+  };
 };

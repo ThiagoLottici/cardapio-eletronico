@@ -2,13 +2,15 @@ import {
   PEDIDOS_CONFIRMADOS_FETCH_SUCCESS,
   SET_CHECKED_PROP_ITEM_PEDIDO,
   ON_CHECKBOX_CHANGE,
-  FINALIZA_PEDIDO
+  PUT_PEDIDO_SUCCESS,
+  TEM_PEDIDOS_NOVOS
 } from '../actions/types';
 
 const INITIAL_STATE = {
   pedidos: [],
   itemPedidos: [],
-  itemPedidoProntoDisabled: true
+  itemPedidoProntoDisabled: true,
+  temPedidosNovos: false
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -24,8 +26,10 @@ export default (state = INITIAL_STATE, action) => {
             itemPedido
           )
       };
-      case FINALIZA_PEDIDO:
-
+      case PUT_PEDIDO_SUCCESS:
+        return { ...state, pedidos: state.pedidos.filter(pedido => pedido.Id !== action.payload) };
+      case TEM_PEDIDOS_NOVOS:
+        return { ...state, temPedidosNovos: action.payload };
     default:
       return state;
   }

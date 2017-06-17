@@ -1,18 +1,22 @@
 import React, { Component } from 'react';
 import { View, Text, Button } from 'react-native';
 import { connect } from 'react-redux';
+import { removeItem } from '../actions';
 
 class ListItemPedidosToConfirm extends Component {
   
   componentWillMount() {
-    this.props;
+    debugger;
+    console.log(this.props);
   }
 
   removeItem() {
-    
+    debugger;
+    this.props.removeItem(this.props.ItemPedido.Id);
   }
 
   render() {
+    console.log(this.props);
     const Item = this.props.ItemPedido.Item;
     return (
         <View style={styles.pedidosNaoConfirmadosStyle}>
@@ -42,4 +46,8 @@ const styles = {
   }
 };
 
-export default ListItemPedidosToConfirm;
+const mapStateToProps = (state) => {
+  return { comanda: state.comanda };
+};
+
+export default connect(mapStateToProps, { removeItem })(ListItemPedidosToConfirm);

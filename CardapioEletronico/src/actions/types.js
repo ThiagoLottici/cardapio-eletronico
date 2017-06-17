@@ -14,6 +14,7 @@ export const REGISTRA_PEDIDO_COMANDA = 'registra_pedido_comanda';
 export const REMOVE_PEDIDO_COMANDA = 'remove_pedido_comanda';
 export const PEDIDOS_CONFIRMADOS_FETCH_SUCCESS = 'pedidos_confirmados_fetch_success';
 export const ATUALIZA_PEDIDOS_CONFIRMADOS = 'atualiza_pedidos_confirmados';
+export const REMOVE_ITEM_FROM_PEDIDOS_NAO_CONFIRMADOS = 'remove_item_from_pedidos_nao_confirmados';
 
 export const MESA_FETCH_SUCCESS = 'mesa_fetch_success';
 export const ON_MESA_NUM_CHANGE = 'on_mesa_num_change';

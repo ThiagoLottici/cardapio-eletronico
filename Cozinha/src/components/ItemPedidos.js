@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { ListView, View, Text, Button, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import ListItemItemPedidos from './ListItemItemPedidos';
-import { setCheckedPropToItemPedido } from '../actions';
+import { setCheckedPropToItemPedido, putPedido } from '../actions';
 
 class ItemPedidos extends Component {
 
@@ -31,7 +31,7 @@ class ItemPedidos extends Component {
   }
 
   finalizarPedido() {
-    this.props.postPedido(this.props);
+    this.props.putPedido(this.props);
   }
 
 
@@ -64,4 +64,4 @@ const mapStateToProps = state => {
   return state.pedidos;
 };
 
-export default connect(mapStateToProps, { setCheckedPropToItemPedido })(ItemPedidos);
+export default connect(mapStateToProps, { setCheckedPropToItemPedido, putPedido })(ItemPedidos);

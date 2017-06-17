@@ -9,7 +9,6 @@ class ListItemPedidosConfirmados extends Component {
   }
 
   render() {
-    debugger;
     const Item = this.props.ItemPedido.Item;
     return (
         <View style={styles.pedidosNaoConfirmadosStyle}>

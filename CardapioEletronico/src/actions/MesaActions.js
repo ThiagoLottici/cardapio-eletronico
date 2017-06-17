@@ -34,11 +34,11 @@ export const selecionarMesaPost = (mesaNum) => {
       NumMesa: mesaNum
     })
     .then((response) => {
-      console.log(response);
+      //console.log(response);
       selecionaMesaSuccess(dispatch, response);
     })
     .catch((error) => {
-      console.log(error);
+      //console.log(error);
       selecionaMesaFail(dispatch, error);
     });
   };
@@ -55,7 +55,7 @@ const selecionaMesaSuccess = (dispatch, response) => {
 
 const selecionaMesaFail = (dispatch, error) => {
   dispatch({
-    type:SELECIONA_MESA_FAIL,
+    type: SELECIONA_MESA_FAIL,
     payload: error
   });
 };

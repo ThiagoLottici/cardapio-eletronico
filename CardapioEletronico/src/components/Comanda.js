@@ -5,11 +5,12 @@ import ListItemPedidosToConfirm from './ListItemPedidosToConfirm';
 import ListItemPedidosConfirmados from './ListItemPedidosConfirmados';
 import { pedidosConfirmadosFetch, postPedido } from '../actions';
 
+
 class Comanda extends Component {
 
   componentWillMount() {
     debugger;
-    this.props.pedidosConfirmadosFetch();
+    this.props.pedidosConfirmadosFetch(this.props.comanda.comanda.Id);
     this.createDataSource(this.props);
   }
 
@@ -26,11 +27,11 @@ class Comanda extends Component {
   }
 
   createPedidosConfirmadosDataSource(comanda) {
+    debugger;
     const ds = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2
     });
     this.pedidosConfirmadosDataSource = ds.cloneWithRows(comanda.pedidosConfirmados);
-    debugger;
   }
 
   createDataSource({ comanda }) {
@@ -112,6 +113,9 @@ class Comanda extends Component {
       <View>
         {this.renderPedidosNaoConfirmados()}
         {this.renderPedidosConfirmados()}
+        <Text>
+        Total: R$ 10,00
+        </Text>
       </View>
       );
   }

@@ -1,8 +1,12 @@
 import axios from 'axios';
+import socketClient from 'socket.io-client';
+import { Actions } from 'react-native-router-flux';
 import {
   PEDIDOS_CONFIRMADOS_FETCH_SUCCESS,
   SET_CHECKED_PROP_ITEM_PEDIDO,
-  ON_CHECKBOX_CHANGE
+  ON_CHECKBOX_CHANGE,
+  PUT_PEDIDO_SUCCESS,
+  TEM_PEDIDOS_NOVOS
 } from './types';
 
 
@@ -33,6 +37,33 @@ export const onCheckboxChange = (ItemPedido) => {
   };
 };
 
-export const postPedido = (Pedido) => {
+export const putPedido = (Pedido) => {
+  debugger;
   console.log(Pedido);
+  return(dispatch) => {
+  axios.put('https://me-server.herokuapp.com/pedidos', {
+    Id: Pedido.Item.Id,
+    Status: 2
+  })
+  .then(() => {
+    removePedidoDaLista(dispatch, Pedido.Item.Id);
+  })
+  .catch(error => {
+    console.log(error);
+  });
+  };
+};
+
+const removePedidoDaLista = (dispatch, Id) => {
+  dispatch({ type: PUT_PEDIDO_SUCCESS, payload: Id });
+  Actions.pedidos();
+};
+
+export const criaSocket = () => {
+  return (dispatch) => {
+  const socket = socketClient.connect('https://me-server.herokuapp.com/', { reconnect: true });
+    socket.on('cozinha', () => {
+      dispatch({ type: TEM_PEDIDOS_NOVOS, payload: true });
+    });
+  };
 };

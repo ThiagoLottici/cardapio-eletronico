@@ -17,7 +17,10 @@ class ListItemItemPedidos extends Component {
     return (
       <View>
         <Text>
-          {this.props.ItemPedido.Obs} 
+          {Item.Nome} 
+        </Text>
+        <Text>
+          {Item.Obs}
         </Text>
         <CheckBox
           label=''
