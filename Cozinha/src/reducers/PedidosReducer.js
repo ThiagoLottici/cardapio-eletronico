@@ -3,20 +3,21 @@ import {
   SET_CHECKED_PROP_ITEM_PEDIDO,
   ON_CHECKBOX_CHANGE,
   PUT_PEDIDO_SUCCESS,
-  TEM_PEDIDOS_NOVOS
+  TEM_PEDIDOS_NOVOS,
 } from '../actions/types';
 
 const INITIAL_STATE = {
   pedidos: [],
   itemPedidos: [],
   itemPedidoProntoDisabled: true,
-  temPedidosNovos: false
+  temPedidosNovos: false,
+  loading: true
 };
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case PEDIDOS_CONFIRMADOS_FETCH_SUCCESS:
-      return { ...state, pedidos: action.payload };
+      return { ...state, pedidos: action.payload, temPedidosNovos: false, loading: false };
     case SET_CHECKED_PROP_ITEM_PEDIDO:
       return { ...state, itemPedidos: action.payload };
     case ON_CHECKBOX_CHANGE:

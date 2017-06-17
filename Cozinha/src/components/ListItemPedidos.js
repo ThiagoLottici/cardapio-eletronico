@@ -10,7 +10,6 @@ class ListItemPedidos extends Component {
   }
 
   onRowPress() {
-    debugger;
     Actions.itemPedidos({ Item: this.props.Item });
   }
 

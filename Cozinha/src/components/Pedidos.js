@@ -3,6 +3,7 @@ import { ListView, View, Text, TouchableWithoutFeedback } from 'react-native';
 import { connect } from 'react-redux';
 import ListItemPedidos from './ListItemPedidos';
 import { pedidosFetch, criaSocket } from '../actions';
+import { Spinner } from './common';
 
 class Pedidos extends Component {
   componentWillMount() {
@@ -31,7 +32,7 @@ class Pedidos extends Component {
   }
 
   atualizaPedidos() {
-    
+    this.props.pedidosFetch();
   }
 
   renderHaPedidosNovos() {
@@ -50,6 +51,9 @@ class Pedidos extends Component {
   }
 
   render() { 
+    if (this.props.pedidos.loading) {
+      return <Spinner size="large" />;
+    }
   return (
     <View style={{ flex: 1 }}>
     <View style={{ flex: 1 }}>
