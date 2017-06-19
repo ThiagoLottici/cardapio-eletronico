@@ -63,38 +63,43 @@ class Comanda extends Component {
     const pedidosNaoConfirmados = this.props.comanda.pedidosNaoConfirmados;
     if (pedidosNaoConfirmados.length > 0) {
       return (
-        <View>
-        <Text style={styles.textStyle}>
-          Pedidos não confirmados
-        </Text>
-        <View style={styles.listViewContainer}>
+        <View style={{ flex: 0.45 }}>
+        <View style={{ flex: 0.1 }}>
+          <Text style={styles.textStyle}>
+            Pedidos não confirmados
+          </Text>
+        </View>
+        <View style={styles.listViewContainer, { flex: 0.8 }}>
             <ListView
                enableEmptySections
                dataSource={this.pedidosNaoConfirmadosDataSource}
                renderRow={this.pedidosNaoConfirmadosRenderRow}
             />
          </View>
+         <View style={{ flex: 0.2 }}>
          <Button 
           title="Confirmar pedidos"
           onPress={this.finalizarPedido.bind(this)}
          />
          </View>
+         </View>
         );
     } else {
-      return null;
+      return <View style={{ flex: 0 }}></View>;
     }
   }
 
   renderPedidosConfirmados() {
-    debugger;
     const pedidosConfirmados = this.props.comanda.pedidosConfirmados;
     if (pedidosConfirmados.length > 0) {
       return (
-        <View>
-        <Text style={styles.textStyle}>
-          Pedidos confirmados
-        </Text>
-        <View style={styles.listViewContainer}>
+        <View style={{ flex: 0.45 }}>
+          <View style={{ flex: 0.1 }}>
+              <Text style={styles.textStyle}>
+                Pedidos confirmados
+              </Text>
+          </View>
+        <View style={styles.listViewContainer, { flex: 0.9 }}>
             <ListView
                enableEmptySections
                dataSource={this.pedidosConfirmadosDataSource}
@@ -108,16 +113,53 @@ class Comanda extends Component {
     }
   }
 
-  render() {
+  renderTotalPedidosNaoConfirmados() {
     return (
-      <View>
-        {this.renderPedidosNaoConfirmados()}
-        {this.renderPedidosConfirmados()}
-        <Text>
-        Total: R$ 10,00
-        </Text>
+      <View style={{ flexDirection: 'row', backgroundColor: 'powderblue', flex: 1 }}>
+        <View style={{ flex: 2 }}>
+            <Text>
+              TOTAL Pedidos não confirmados:
+            </Text>
+        </View>
+          <View style={{ flex: 1, paddingRight: 30 }}>
+            <Text style={{ textAlign: 'right' }}>
+              R$ {this.props.comanda.totalPedidosNaoConfirmados}
+            </Text>
+          </View>
       </View>
       );
+  }
+
+  renderTotalComanda() {
+    return (
+      <View style={{ flexDirection: 'row', backgroundColor: 'powderblue', flex: 1 }}>
+        <View style={{ flex: 2 }}>
+            <Text>
+              TOTAL:
+            </Text>
+        </View>
+          <View style={{ flex: 1, paddingRight: 30 }}>
+            <Text style={{ textAlign: 'right' }}>
+              R$ {this.props.comanda.totalPedidos}
+            </Text>
+          </View>
+      </View>
+      );
+  }
+
+  render() {
+    return (
+      <View style={{ flex: 1 }}>
+          <View style={{ flex: 0.9 }}>
+            {this.renderPedidosNaoConfirmados()}
+            {this.renderPedidosConfirmados()}
+          </View>
+        <View style={{ flex: 0.1 }}>
+            {this.renderTotalPedidosNaoConfirmados()}
+            {this.renderTotalComanda()}
+        </View>
+        </View>
+        );
   }
 }
 
@@ -130,7 +172,7 @@ const styles = {
   listViewContainer: {
     paddingTop: 10,
     borderTopColor: '#bbb',
-    borderTopWidth: StyleSheet.hairlineWidth
+    borderTopWidth: StyleSheet.hairlineWidth,
 
   }
 };

@@ -3,6 +3,7 @@ import { ListView, View, Text, Button, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import ListItemItemPedidos from './ListItemItemPedidos';
 import { setCheckedPropToItemPedido, putPedido } from '../actions';
+const MessageBarManager = require('react-native-message-bar').MessageBarManager;
 
 class ItemPedidos extends Component {
 

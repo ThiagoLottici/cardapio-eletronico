@@ -12,7 +12,7 @@ class ListItemPedidosToConfirm extends Component {
 
   removeItem() {
     debugger;
-    this.props.removeItem(this.props.ItemPedido.Id);
+    this.props.removeItem(this.props.ItemPedido);
   }
 
   render() {

@@ -15,7 +15,7 @@ class ListItemPedidos extends Component {
 
   render() {
     const Item = this.props.Item;
-    const pedidoLabel = `Pedido Comanda#${Item.IdComanda}`;
+    const pedidoLabel = `Pedido#${Item.Id}`;
     return (
       <TouchableWithoutFeedback onPress={this.onRowPress.bind(this)}>
         <View style={styles.pedidosNaoConfirmadosStyle}>

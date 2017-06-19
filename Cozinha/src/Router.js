@@ -24,11 +24,11 @@ const getSceneStyle = (/* NavigationSceneRendererProps */ props, computedProps) 
 const RouterComponent = () => {
   return (
     <Router getSceneStyle={getSceneStyle}>
-     <Scene key="main">
       <Scene 
         key="pedidos"
         title="Pedidos"
         initial
+        hideBackImage
         component={Pedidos}
       />
       <Scene 
@@ -36,7 +36,6 @@ const RouterComponent = () => {
         title="Itens do Pedido"
         component={ItemPedidos}
       />
-     </Scene>
     </Router>
   );
 };

@@ -7,8 +7,9 @@ import {
   ON_CHECKBOX_CHANGE,
   PUT_PEDIDO_SUCCESS,
   TEM_PEDIDOS_NOVOS,
+  SET_FALSE_MESSAGE_BAR,
+  FIRST_CONNECTION
 } from './types';
-
 
 export const pedidosFetch = () => {
   return (dispatch) => {
@@ -38,14 +39,13 @@ export const onCheckboxChange = (ItemPedido) => {
 };
 
 export const putPedido = (Pedido) => {
-  debugger;
   console.log(Pedido);
   return(dispatch) => {
   axios.put('https://me-server.herokuapp.com/pedidos', {
     Id: Pedido.Item.Id,
     Status: 2
   })
-  .then(() => {
+  .then((response) => {
     removePedidoDaLista(dispatch, Pedido.Item.Id);
   })
   .catch(error => {
@@ -56,14 +56,21 @@ export const putPedido = (Pedido) => {
 
 const removePedidoDaLista = (dispatch, Id) => {
   dispatch({ type: PUT_PEDIDO_SUCCESS, payload: Id });
-  Actions.pedidos();
+  Actions.pedidos({ type: 'reset' });
 };
 
 export const criaSocket = () => {
   return (dispatch) => {
   const socket = socketClient.connect('https://me-server.herokuapp.com/', { reconnect: true });
+    dispatch({ type: FIRST_CONNECTION, payload: false });
     socket.on('cozinha', () => {
       dispatch({ type: TEM_PEDIDOS_NOVOS, payload: true });
     });
+  };
+};
+
+export const setFalseMessageBar = () => {
+  return {
+    type: SET_FALSE_MESSAGE_BAR
   };
 };

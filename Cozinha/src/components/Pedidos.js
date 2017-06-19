@@ -2,18 +2,39 @@ import React, { Component } from 'react';
 import { ListView, View, Text, TouchableWithoutFeedback } from 'react-native';
 import { connect } from 'react-redux';
 import ListItemPedidos from './ListItemPedidos';
-import { pedidosFetch, criaSocket } from '../actions';
+import { pedidosFetch, criaSocket, setFalseMessageBar } from '../actions';
 import { Spinner } from './common';
+const MessageBarAlert = require('react-native-message-bar').MessageBar;
+const MessageBarManager = require('react-native-message-bar').MessageBarManager;
 
 class Pedidos extends Component {
+
   componentWillMount() {
+    if (this.props.pedidos.firstConnection) {
     this.props.criaSocket();
     this.props.pedidosFetch();
+  }
     this.createDataSource(this.props);
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentDidMount() {
+    MessageBarManager.registerMessageBar(this.refs.alert);
+  }
+
+    componentWillReceiveProps(nextProps) {
+      debugger;
     this.createDataSource(nextProps);
+      if (this.props.pedidos.messageBarPedidoFinalizado) {
+        MessageBarManager.showAlert({
+        message: "Pedido finalizado com sucesso",
+        alertType: 'success'
+    });
+        this.props.setFalseMessageBar();
+      }
+  }
+
+  componentWillUnmount() {
+    MessageBarManager.unregisterMessageBar();
   }
 
   createDataSource({ pedidos }) {
@@ -64,6 +85,7 @@ class Pedidos extends Component {
     />
     </View>
       {this.renderHaPedidosNovos()}
+      <MessageBarAlert ref="alert" />
     </View>
     );
   }
@@ -74,4 +96,4 @@ const mapStateToProps = (state) => {
 };
 
 
-export default connect(mapStateToProps, { pedidosFetch, criaSocket })(Pedidos);
+export default connect(mapStateToProps, { pedidosFetch, criaSocket, setFalseMessageBar })(Pedidos);
