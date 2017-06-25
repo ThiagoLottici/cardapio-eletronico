@@ -13,7 +13,6 @@ import Mesas from './components/Mesas';
 const getSceneStyle = (/* NavigationSceneRendererProps */ props, computedProps) => {
   const style = {
     flex: 1,
-    backgroundColor: '#fff',
     shadowColor: null,
     shadowOffset: null,
     shadowOpacity: null,
@@ -30,11 +29,11 @@ const RouterComponent = () => {
   return (
     <Router getSceneStyle={getSceneStyle}>
       <Scene key="auth">
-        <Scene key="login" component={LoginForm} title="Please Login" />
-        <Scene key="createUser" component={CreateUserForm} title="Create User" />
+        <Scene key="login" component={LoginForm} title="LOGIN" titleStyle={styles.titleStyle} navigationBarStyle={ styles.navigationBarStyle} />
+        <Scene key="createUser" component={CreateUserForm} title="CREATE USER" titleStyle={styles.titleStyle} navigationBarStyle={ styles.navigationBarStyle} />
       </Scene>
 
-      <Scene key="mesas" component={Mesas} title="Mesas" />
+      <Scene key="mesas" component={Mesas} title="MESAS" navigationBarStyle={ styles.navigationBarStyle} titleStyle={styles.titleStyle} />
 
      <Scene key="main">
       <Scene 
@@ -48,15 +47,16 @@ const RouterComponent = () => {
             initial
             icon={TabIcon}
          >
-          <Scene key="cardapio" component={Cardapio} title="Cardpáio" initial />
-          <Scene key="dishDetail" component={DetalhesPedido} title="Detalhes do Prato" />
+          <Scene key="cardapio" component={Cardapio} title="CARDÁPIO" initial navigationBarStyle={ styles.navigationBarStyle} titleStyle={styles.titleStyle} />
+          <Scene key="dishDetail" component={DetalhesPedido} title="DETALHES DO PRATO" navigationBarStyle={ styles.navigationBarStyle} titleStyle={styles.titleStyle} />
          </Scene>
          <Scene
             key="comandaScene"
             title="Comanda"
             icon={TabIcon}
+            titleStyle={{ color:'white' }}
          >
-          <Scene key="comanda" component={Comanda} title="Comanda" initial />
+          <Scene key="comanda" component={Comanda} title="COMANDA" initial navigationBarStyle={ styles.navigationBarStyle} titleStyle={styles.titleStyle} />
          </Scene>
        </Scene>
        </Scene>
@@ -68,12 +68,21 @@ const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: 'transparent', justifyContent: 'center',
     alignItems: 'center',
   },
+  navigationBarStyle: {
+    backgroundColor: '#D32F2F'
+  },
   tabBarStyle: {
-    backgroundColor: '#eee',
+    backgroundColor: 'white',
+    borderTopWidth: 1,
+    borderTopColor: '#e0e0e0',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 2
   },
-  tabBarSelectedItemStyle: {
-    backgroundColor: '#ddd',
-  },
+  titleStyle: {
+    color:'white',
+    fontWeight: 'bold'
+  }
 });
 
 export default RouterComponent;

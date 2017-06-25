@@ -3,6 +3,7 @@ import { Text, View, TextInput, Button } from 'react-native';
 import { connect } from 'react-redux';
 import { registrarItemPedidoComanda } from '../actions';
 import { Actions } from 'react-native-router-flux';
+import { DecreaseButton, IncreaseButton, ConfirmButton, EnviarPedidoButton } from './common';
 
 class DetalhesPedido extends Component {
 
@@ -32,8 +33,16 @@ class DetalhesPedido extends Component {
       return (
         <View>
           <View>
-          <Text>
-            Observações
+          <Text style={{ fontWeight: 'bold', fontSize: 24, paddingLeft: 5 }}>
+            {this.state.ItemPedido.Item.Nome}
+          </Text>
+            <Text style={{ paddingTop: 10, paddingLeft: 10 }}>
+              {this.state.ItemPedido.Item.Ingredientes}
+            </Text>
+          </View>
+          <View>
+          <Text style={{ paddingTop: 20, paddingLeft: 5 }}>
+            Alguma observação do seu pedido?
           </Text>
             <TextInput
               multiline
@@ -44,26 +53,38 @@ class DetalhesPedido extends Component {
               style={styles.textInputStyle}
               />
           </View>
-          <View>
-          <Text>
-            Quantidade
-          </Text>
-            <Button 
-            title="+"
-            onPress={() => this.incrementCount()}
-            />
-            <Text>
-              {this.state.ItemPedido.Quantidade}
-            </Text>
-            <Button 
-            title="-"
-            onPress={() => this.decrementCount()}
-            />
-            <Button 
-            title="Enviar pedido para comanda"
-            onPress={this.onEnviarParaComandaButtonPress.bind(this)}
-            />
-          </View>
+              <View>
+                <Text>
+                  Quantidade
+                </Text>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 30 }}>
+                  <View style={{ paddingTop: 5 }}>
+                      <DecreaseButton 
+                      style={{ paddingTop: 10 }}
+                      onPress={() => this.decrementCount()}
+                      >
+                      -
+                      </DecreaseButton>
+                  </View>
+                      <Text style={{ fontWeight: 'bold', fontSize: 30 }}>
+                        {this.state.ItemPedido.Quantidade}
+                      </Text>
+                      <View style={{ paddingTop: 10 }}>
+                          <IncreaseButton 
+                          onPress={() => this.incrementCount()}
+                          >
+                          +
+                          </IncreaseButton>
+                      </View>
+                  </View>
+                  <View style={{ paddingTop: 20 }}>
+                  <EnviarPedidoButton
+                  onPress={this.onEnviarParaComandaButtonPress.bind(this)}
+                  >
+                  Enviar pedido para comanda
+                  </EnviarPedidoButton>
+                  </View>
+              </View>
           </View>
           );
       }

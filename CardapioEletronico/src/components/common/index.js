@@ -5,3 +5,8 @@ export * from './Header';
 export * from './Input';
 export * from './Spinner';
 export * from './Confirm';
+export * from './DeleteButton';
+export * from './ConfirmButton';
+export * from './IncreaseButton';
+export * from './DecreaseButton';
+export * from './EnviarPedidoButton';

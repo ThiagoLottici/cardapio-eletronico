@@ -15,14 +15,25 @@ class ListItemCardapio extends Component {
     const { Nome, Ingredientes } = this.props.Item;
     return (
       <TouchableWithoutFeedback onPress={this.onRowPress.bind(this)}>
-        <View>
+        <View style={{ flexDirection: 'row' }}>
           <CardSection style={styles.cardapioStyle}>
-            <Text style={styles.titleStyle}>
-              { Nome }
-            </Text>
-            <Text>
-              { Ingredientes }
-            </Text>
+            <View style={{ flexDirection: 'column', flex: 6 }}>
+            <View accessible accessibilityLabel={'Nome' + this.props.Item.Nome + ' Ingredientes' + this.props.Item.Ingredientes}>
+              <Text style={styles.titleStyle}>
+                { Nome }
+              </Text>
+            </View>
+            <View style={styles.ingredientesStyle}>
+                <Text>
+                  { Ingredientes }
+                </Text>
+            </View>
+            </View>
+             <View style={{ flex: 1, paddingTop: 15 }} accessible accessibilityLabel={'Valor' + this.props.Item.Preco}>
+                <Text>
+                  R$ {this.props.Item.Preco}
+                </Text>
+             </View>
           </CardSection>
         </View>
       </TouchableWithoutFeedback>
@@ -33,10 +44,14 @@ class ListItemCardapio extends Component {
 const styles = {
   titleStyle: {
     fontSize: 18,
-    paddingLeft: 15
+    paddingLeft: 5,
+    fontWeight: 'bold'
   },
   cardapioStyle: {
-    flexDirection: 'column'
+    flex: 3
+  },
+  ingredientesStyle: {
+    paddingLeft: 10
   }
 };
 

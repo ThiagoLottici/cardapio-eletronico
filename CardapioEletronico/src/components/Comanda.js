@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import ListItemPedidosToConfirm from './ListItemPedidosToConfirm';
 import ListItemPedidosConfirmados from './ListItemPedidosConfirmados';
 import { pedidosConfirmadosFetch, postPedido } from '../actions';
+import { ConfirmButton } from './common';
 
 
 class Comanda extends Component {
@@ -63,25 +64,27 @@ class Comanda extends Component {
     const pedidosNaoConfirmados = this.props.comanda.pedidosNaoConfirmados;
     if (pedidosNaoConfirmados.length > 0) {
       return (
-        <View style={{ flex: 0.45 }}>
-        <View style={{ flex: 0.1 }}>
-          <Text style={styles.textStyle}>
-            Pedidos não confirmados
+        <View style={{ flex: 0.55 }} accessible accessibilityLabel={'Pedidos não confirmados!'} >
+          <View style={ { borderBottomWidth: 1, borderColor: '#ddd' }}>
+            <Text style={styles.textStyle}>
+              PEDIDOS NÃO CONFIRMADOS
           </Text>
-        </View>
-        <View style={styles.listViewContainer, { flex: 0.8 }}>
+          </View>
+        <View style={styles.listViewContainer, { flex: 0.10 }} accessible accessibilityLabel={'Lista de pedidos não confirmados'}>
             <ListView
                enableEmptySections
                dataSource={this.pedidosNaoConfirmadosDataSource}
                renderRow={this.pedidosNaoConfirmadosRenderRow}
             />
          </View>
-         <View style={{ flex: 0.2 }}>
-         <Button 
-          title="Confirmar pedidos"
-          onPress={this.finalizarPedido.bind(this)}
-         />
-         </View>
+             <View style={{ alignItems: 'flex-end', paddingBottom: 5, paddingTop: 5 }}>
+                 <ConfirmButton
+                 accessible accessibilityLabel={'Pressione para finalizar o pedido'} 
+                  onPress={this.finalizarPedido.bind(this)}
+                 >
+                    Confirmar
+                 </ConfirmButton>
+             </View>
          </View>
         );
     } else {
@@ -93,13 +96,13 @@ class Comanda extends Component {
     const pedidosConfirmados = this.props.comanda.pedidosConfirmados;
     if (pedidosConfirmados.length > 0) {
       return (
-        <View style={{ flex: 0.45 }}>
-          <View style={{ flex: 0.1 }}>
+        <View style={{ flex: 0.35 }}>
+          <View accessible accessibilityLabel={'Pedidos confirmados!'}>
               <Text style={styles.textStyle}>
-                Pedidos confirmados
+                PEDIDOS CONFIRMADOS
               </Text>
           </View>
-        <View style={styles.listViewContainer, { flex: 0.9 }}>
+        <View style={styles.listViewContainer} accessible accessibilityLabel={'Lista de pedidos confirmados!'}>
             <ListView
                enableEmptySections
                dataSource={this.pedidosConfirmadosDataSource}
@@ -109,13 +112,13 @@ class Comanda extends Component {
          </View>
         );
     } else {
-      return null;
+      return <View style={{ flex: 0 }}></View>;
     }
   }
 
   renderTotalPedidosNaoConfirmados() {
     return (
-      <View style={{ flexDirection: 'row', backgroundColor: 'powderblue', flex: 1 }}>
+      <View style={{ flexDirection: 'row', flex: 1 }}>
         <View style={{ flex: 2 }}>
             <Text>
               TOTAL Pedidos não confirmados:
@@ -132,7 +135,7 @@ class Comanda extends Component {
 
   renderTotalComanda() {
     return (
-      <View style={{ flexDirection: 'row', backgroundColor: 'powderblue', flex: 1 }}>
+      <View style={{ flexDirection: 'row', flex: 1 }}>
         <View style={{ flex: 2 }}>
             <Text>
               TOTAL:
@@ -166,11 +169,11 @@ class Comanda extends Component {
 const styles = {
   textStyle: {
     padding: 2,
-    paddingBottom: 10,
-    textDecorationLine: 'underline'
+    paddingBottom: 5,
+    fontSize: 16,
+    fontFamily: 'Roboto'
   },
   listViewContainer: {
-    paddingTop: 10,
     borderTopColor: '#bbb',
     borderTopWidth: StyleSheet.hairlineWidth,
 

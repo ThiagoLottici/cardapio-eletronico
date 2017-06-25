@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Picker, Button } from 'react-native';
+import { View, Picker, Button, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { mesasFetch, selecionarMesaPost, onMesaNumChange } from '../actions';
 import { Spinner, CardSection } from './common';
@@ -38,7 +38,13 @@ class Mesas extends Component {
   render() {
     return (
       <View>
+       <View>
+         <Text>
+           Escolha uma das mesas disponíveis: 
+         </Text>
+       </View>
         <Picker
+          accessible accessibilityLabel={'Dropdown, selecione uma mesa'}
           style={{ width: 100 }}
           selectedValue={this.props.mesas.mesaNum}
           onValueChange={(mesaNum) => this.props.onMesaNumChange({ mesaNum })}>

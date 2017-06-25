@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, Image } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import { emailChanged, passwordChanged, loginUser } from '../actions';
 import { Card, CardSection, Input, Button, Spinner } from './common';
-
 
 class LoginForm extends Component {
   onEmailChange(text) {
@@ -39,39 +38,49 @@ class LoginForm extends Component {
 
   render() {
     return (
-      <Card>
-        <CardSection>
-          <Input
-            label="Email"
-            placeholder="email@gmail.com"
-            onChangeText={this.onEmailChange.bind(this)}
-            value={this.props.email}
-          />
-        </CardSection>
+      <View style={{ flex: 1 }}>
+        <View style={{ flex: 0.5 }}>
+          <Image
+            source={require('../images/c.png')}
+            style={styles.image}
+            />
+        </View>
+        <View>
+            <Card>
+              <CardSection>
+                <Input
+                  label="Email"
+                  placeholder="email@gmail.com"
+                  onChangeText={this.onEmailChange.bind(this)}
+                  value={this.props.email}
+                />
+              </CardSection>
 
-        <CardSection>
-          <Input
-            secureTextEntry
-            label="Password"
-            placeholder="password"
-            onChangeText={this.onPasswordChange.bind(this)}
-            value={this.props.password}
-          />
-        </CardSection>
+              <CardSection>
+                <Input
+                  secureTextEntry
+                  label="Password"
+                  placeholder="password"
+                  onChangeText={this.onPasswordChange.bind(this)}
+                  value={this.props.password}
+                />
+              </CardSection>
 
-        <Text style={styles.errorTextStyle}>
-          {this.props.error}
-        </Text>
+              <Text style={styles.errorTextStyle}>
+                {this.props.error}
+              </Text>
 
-        <CardSection>
-          {this.renderButton()}
-        </CardSection>
-        <CardSection>
-          <Button onPress={this.onCreateButtonPress.bind(this)}>
-            Sign Up
-          </Button>
-        </CardSection>
-      </Card>
+              <CardSection>
+                {this.renderButton()}
+              </CardSection>
+              <CardSection>
+                <Button onPress={this.onCreateButtonPress.bind(this)}>
+                  Sign Up
+                </Button>
+              </CardSection>
+            </Card>
+          </View>
+        </View>
     );
   }
 }
@@ -81,7 +90,13 @@ const styles = {
     fontSize: 20,
     alignSelf: 'center',
     color: 'red'
-  }
+  },
+  image: {
+    flex: 1,
+    width: null,
+    height: null,
+    resizeMode: 'contain'
+}
 };
 
 const mapStateToProps = ({ auth }) => {
