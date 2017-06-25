@@ -14,14 +14,32 @@ class ListItemPedidos extends Component {
   }
 
   render() {
+    debugger;
     const Item = this.props.Item;
-    const pedidoLabel = `Pedido#${Item.Id}`;
+    const Entrada = Item.DataEntrada;
+    const IndexT = Entrada.indexOf("T");
+    const HoraEntrada = Entrada.substring(IndexT + 1, IndexT + 3 ) + 'h';
+    const MinEntrada = Entrada.substring(IndexT + 3, IndexT + 6) + 'min';
+    const comandaLabel = `Comanda#${Item.Id}`;
     return (
       <TouchableWithoutFeedback onPress={this.onRowPress.bind(this)}>
         <View style={styles.pedidosNaoConfirmadosStyle}>
-          <Text>
-            {pedidoLabel}
-          </Text>
+          <View style={{ flexDirection: 'column', flex: 0.5, paddingLeft: 5 }}>
+              <Text>
+                {comandaLabel}
+              </Text>
+              <Text style={{ paddingTop: 10 }}>
+                Nro. Mesa: {Item.Mesa}
+              </Text>
+            </View>
+            <View style={{ flexDirection: 'column', flex: 0.5 }}>
+              <Text>
+                Entrada: { HoraEntrada }{MinEntrada} 
+              </Text>
+              <Text style={{ paddingTop: 10, color: 'green' }}>
+                TOTAL: R$ 10,00
+              </Text>
+            </View>
         </View>
       </TouchableWithoutFeedback>
       );
@@ -36,7 +54,8 @@ const styles = {
     justifyContent: 'flex-start',
     flexDirection: 'row',
     borderColor: '#ddd',
-    position: 'relative'
+    position: 'relative',
+    flex: 1
   }
 };
 

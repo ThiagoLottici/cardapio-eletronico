@@ -13,7 +13,7 @@ import {
 
 export const pedidosFetch = () => {
   return (dispatch) => {
-    axios.get('https://me-server.herokuapp.com/pedidos')
+    axios.get('https://me-server.herokuapp.com/comandas')
     .then(response => {
       dispatch({ type: PEDIDOS_CONFIRMADOS_FETCH_SUCCESS, payload: response.data });
     });

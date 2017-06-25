@@ -35,36 +35,61 @@ class ItemPedidos extends Component {
     this.props.putPedido(this.props);
   }
 
+  renderPedidosConfirmados() {
+    const pedidosConfirmados = this.props.comanda.pedidosConfirmados;
+    if (pedidosConfirmados.length > 0) {
+      return (
+        <View style={{ flex: 0.35 }}>
+          <View accessible accessibilityLabel={'Pedidos confirmados!'}>
+              <Text style={styles.textStyle}>
+                PEDIDOS CONFIRMADOS
+              </Text>
+          </View>
+        <View style={styles.listViewContainer} accessible accessibilityLabel={'Lista de pedidos confirmados!'}>
+            <ListView
+               enableEmptySections
+               dataSource={this.pedidosConfirmadosDataSource}
+               renderRow={this.pedidosConfirmadosRenderRow}
+            />
+         </View>
+         </View>
+        );
+
+  renderTotalComanda() {
+    return (
+      <View style={{ flexDirection: 'row', flex: 1 }}>
+        <View style={{ flex: 2 }}>
+            <Text>
+              TOTAL:
+            </Text>
+        </View>
+          <View style={{ flex: 1, paddingRight: 30 }}>
+            <Text style={{ textAlign: 'right' }}>
+              R$ {this.props.comanda.totalPedidos}
+            </Text>
+          </View>
+      </View>
+      );
+  }
+
 
   render() {
     return (
-      <View>
-        <ListView
-        enableEmptySections
-        dataSource={this.dataSource}
-        renderRow={this.renderRow}
-        />
-        <View style={{ paddingTop: 20 }}>
-            <Button
-            title="Finalizar Pedido"
-            disabled={this.props.itemPedidoProntoDisabled}
-            onPress={this.finalizarPedido.bind(this)}
-            />
+      <View style={{ flex: 1 }}>
+          <View style={{ flex: 0.9 }}>
+            {this.renderPedidosConfirmados()}
+          </View>
+        <View style={{ flex: 0.1 }}>
+            {this.renderTotalComanda()}
         </View>
-      </View>
-    );
+        </View>
+        );
   }
 }
 
 const mapStateToProps = state => {
-  let itemPedidoDisabled = false;
-  state.pedidos.itemPedidos.forEach(Item => {
-    if (Item.Checked === false) {
-      itemPedidoDisabled = true;
-    }
-  });
-  state.pedidos.itemPedidoProntoDisabled = itemPedidoDisabled;
-  return state.pedidos;
+
+  return { pedidos: state.pedidos };
 };
 
 export default connect(mapStateToProps, { setCheckedPropToItemPedido, putPedido })(ItemPedidos);

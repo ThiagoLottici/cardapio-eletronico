@@ -26,7 +26,7 @@ export const registrarItemPedidoComanda = (ItemPedido) => {
 
 export const pedidosConfirmadosFetch = (ComandaId) => {
   return (dispatch) => {
-    axios.get(`https://me-server.herokuapp.com/comanda/${ComandaId}`)
+    axios.get(`https://me-server.herokuapp.com/comandas/${ComandaId}`)
     .then(response => {
       const item = [];
       let totalComanda = 0;
