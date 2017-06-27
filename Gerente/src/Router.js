@@ -26,7 +26,7 @@ const RouterComponent = () => {
     <Router getSceneStyle={getSceneStyle}>
       <Scene 
         key="pedidos"
-        title="PEDIDOS"
+        title="COMANDAS"
         initial
         navigationBarStyle={styles.navigationBarStyle} titleStyle={styles.titleStyle}
         hideBackImage
@@ -34,7 +34,7 @@ const RouterComponent = () => {
       />
       <Scene 
         key="itemPedidos"
-        title="ITENS DO PEDIDO"
+        title="ITENS DA COMANDA"
         navigationBarStyle={styles.navigationBarStyle} titleStyle={styles.titleStyle}
         component={ItemPedidos}
       />

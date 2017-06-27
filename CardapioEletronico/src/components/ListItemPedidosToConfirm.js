@@ -27,7 +27,7 @@ class ListItemPedidosToConfirm extends Component {
                 </Text>
             </View>
             <View style={{ flex: 2 }}>
-                <Text>
+                <Text style={{ color: 'green' }}>
                   R$ {Item.Preco}
                 </Text>
             </View>

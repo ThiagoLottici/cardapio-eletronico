@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 class ListItemPedidos extends Component {
   
   componentWillMount() {
+    debugger;
     this.props;
   }
 
@@ -19,9 +20,16 @@ class ListItemPedidos extends Component {
     return (
       <TouchableWithoutFeedback onPress={this.onRowPress.bind(this)}>
         <View style={styles.pedidosNaoConfirmadosStyle}>
-          <Text>
+          <View style={{ flex: 2}}>
+          <Text style={{ fontWeight: 'bold', color: 'orange' }}>
             {pedidoLabel}
           </Text>
+          </View>
+          <View style={{ flex: 1}}>
+          <Text>
+            {this.props.Item.ItemPedidos.length} Itens 
+          </Text>
+          </View>
         </View>
       </TouchableWithoutFeedback>
       );

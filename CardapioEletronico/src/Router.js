@@ -33,7 +33,7 @@ const RouterComponent = () => {
         <Scene key="createUser" component={CreateUserForm} title="CREATE USER" titleStyle={styles.titleStyle} navigationBarStyle={ styles.navigationBarStyle} />
       </Scene>
 
-      <Scene key="mesas" component={Mesas} title="MESAS" navigationBarStyle={ styles.navigationBarStyle} titleStyle={styles.titleStyle} />
+      <Scene key="mesas" component={Mesas} title="MESAS" hideBackImage navigationBarStyle={ styles.navigationBarStyle} titleStyle={styles.titleStyle} />
 
      <Scene key="main">
       <Scene 

@@ -1,3 +1,4 @@
+import { Actions } from 'react-native-router-flux'; 
 import axios from 'axios';
 import {
   REGISTRA_PEDIDO_COMANDA,
@@ -72,4 +73,20 @@ export const removeItem = (ItemPedido) => {
     type: REMOVE_ITEM_FROM_PEDIDOS_NAO_CONFIRMADOS,
     payload: ItemPedido
   };
+};
+
+export const finalizarComanda = (Comanda) => {
+  return (dispatch) => {
+    axios.post('https://me-server.herokuapp.com/comandas/fechar', {
+      Id: Comanda.Id,
+    })
+    .then(response => telaEscolhaMesa())
+    .catch((error) => {
+      //console.log(error);
+    });
+  };
+};
+
+const telaEscolhaMesa = () => {
+  Actions.mesas();
 };

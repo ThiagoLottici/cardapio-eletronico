@@ -2,28 +2,39 @@ import React, { Component } from 'react';
 import { ListView, View, Text, Button, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import ListItemItemPedidos from './ListItemItemPedidos';
-import { setCheckedPropToItemPedido, putPedido } from '../actions';
+import { createItemList, putPedido } from '../actions';
 const MessageBarManager = require('react-native-message-bar').MessageBarManager;
 
 class ItemPedidos extends Component {
 
-  componentWillMount() { //this.props.Item
-    this.props.setCheckedPropToItemPedido(this.props.Item.ItemPedidos);
-    this.createDataSource(this.props.itemPedidos);
+  componentWillMount() { //this.props.Pedidos
+    this.props.createItemList(this.props.Pedidos);
+     const ItemList = [];
+      this.props.Pedidos.forEach(value => {
+          value.ItemPedidos.forEach(valueItemPedidos => {
+              ItemList.push(Object.assign({}, valueItemPedidos.Item));
+      });
+    });
+    this.createDataSource(ItemList);
   }
 
   componentWillReceiveProps(nextProps) {
-    this.createDataSource(nextProps.itemPedidos);
+    debugger;
+    this.createDataSource(nextProps.pedidos.itemPedidos);
   }
 
-    createDataSource(itemPedidos) {
+  createPedidosConfirmadosDataSource(ItemList) {
     const ds = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2
     });
-    this.dataSource = ds.cloneWithRows(itemPedidos);
+    this.pedidosConfirmadosDataSource = ds.cloneWithRows(ItemList);
   }
 
-    renderRow(itemPedido) {
+    createDataSource(ItemList) {
+    this.createPedidosConfirmadosDataSource(ItemList);
+  }
+
+    pedidosConfirmadosrenderRow(itemPedido) {
     return (
       <ListItemItemPedidos
       ItemPedido={itemPedido}
@@ -36,8 +47,6 @@ class ItemPedidos extends Component {
   }
 
   renderPedidosConfirmados() {
-    const pedidosConfirmados = this.props.comanda.pedidosConfirmados;
-    if (pedidosConfirmados.length > 0) {
       return (
         <View style={{ flex: 0.35 }}>
           <View accessible accessibilityLabel={'Pedidos confirmados!'}>
@@ -49,11 +58,12 @@ class ItemPedidos extends Component {
             <ListView
                enableEmptySections
                dataSource={this.pedidosConfirmadosDataSource}
-               renderRow={this.pedidosConfirmadosRenderRow}
+               renderRow={this.pedidosConfirmadosrenderRow}
             />
          </View>
          </View>
         );
+    }
 
   renderTotalComanda() {
     return (
@@ -64,8 +74,8 @@ class ItemPedidos extends Component {
             </Text>
         </View>
           <View style={{ flex: 1, paddingRight: 30 }}>
-            <Text style={{ textAlign: 'right' }}>
-              R$ {this.props.comanda.totalPedidos}
+            <Text style={{ textAlign: 'right', fontWeight: 'bold', color: 'green' }}>
+              R$ {this.props.pedidos.totalPedidos}
             </Text>
           </View>
       </View>
@@ -87,9 +97,23 @@ class ItemPedidos extends Component {
   }
 }
 
+const styles = {
+  textStyle: {
+    padding: 2,
+    paddingBottom: 5,
+    fontSize: 16,
+    fontFamily: 'Roboto'
+  },
+  listViewContainer: {
+    borderTopColor: '#bbb',
+    borderTopWidth: StyleSheet.hairlineWidth,
+
+  }
+};
+
 const mapStateToProps = state => {
 
   return { pedidos: state.pedidos };
 };
 
-export default connect(mapStateToProps, { setCheckedPropToItemPedido, putPedido })(ItemPedidos);
+export default connect(mapStateToProps, { createItemList, putPedido })(ItemPedidos);

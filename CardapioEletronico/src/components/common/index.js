@@ -10,3 +10,4 @@ export * from './ConfirmButton';
 export * from './IncreaseButton';
 export * from './DecreaseButton';
 export * from './EnviarPedidoButton';
+export * from './FinalizarComandaButton';

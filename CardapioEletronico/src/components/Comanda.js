@@ -3,8 +3,8 @@ import { ListView, View, Text, Button, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import ListItemPedidosToConfirm from './ListItemPedidosToConfirm';
 import ListItemPedidosConfirmados from './ListItemPedidosConfirmados';
-import { pedidosConfirmadosFetch, postPedido } from '../actions';
-import { ConfirmButton } from './common';
+import { pedidosConfirmadosFetch, postPedido, finalizarComanda } from '../actions';
+import { ConfirmButton, FinalizarComandaButton } from './common';
 
 
 class Comanda extends Component {
@@ -60,6 +60,10 @@ class Comanda extends Component {
       );
   }
 
+  finalizarComanda() {
+    this.props.finalizarComanda(this.props.comanda.comanda);
+  }
+
   renderPedidosNaoConfirmados() {
     const pedidosNaoConfirmados = this.props.comanda.pedidosNaoConfirmados;
     if (pedidosNaoConfirmados.length > 0) {
@@ -102,19 +106,36 @@ class Comanda extends Component {
                 PEDIDOS CONFIRMADOS
               </Text>
           </View>
-        <View style={styles.listViewContainer} accessible accessibilityLabel={'Lista de pedidos confirmados!'}>
+        <View style={styles.listViewContainer, { flex: 0.10 }} accessible accessibilityLabel={'Lista de pedidos confirmados!'}>
             <ListView
                enableEmptySections
                dataSource={this.pedidosConfirmadosDataSource}
                renderRow={this.pedidosConfirmadosRenderRow}
             />
          </View>
+          <View style={{ alignSelf: 'center', paddingTop: 20, paddingBottom: 10 }}>
+            {this.renderFinalizarComandaButton()}
+          </View>
          </View>
         );
     } else {
       return <View style={{ flex: 0 }}></View>;
     }
   }
+
+  renderFinalizarComandaButton() {
+    const pedidosNaoConfirmados = this.props.comanda.pedidosNaoConfirmados;
+    if (pedidosNaoConfirmados.length === 0) {
+    return (
+          <FinalizarComandaButton
+            accessible accessibilityLabel={'Pressione para finalizar a comanda'} 
+            onPress={this.finalizarComanda.bind(this)}
+           >
+              Finalizar Comanda
+           </FinalizarComandaButton>
+      );
+  }
+}
 
   renderTotalPedidosNaoConfirmados() {
     return (
@@ -125,7 +146,7 @@ class Comanda extends Component {
             </Text>
         </View>
           <View style={{ flex: 1, paddingRight: 30 }}>
-            <Text style={{ textAlign: 'right' }}>
+            <Text style={{ textAlign: 'right', color: 'green', fontWeight: 'bold' }}>
               R$ {this.props.comanda.totalPedidosNaoConfirmados}
             </Text>
           </View>
@@ -142,7 +163,7 @@ class Comanda extends Component {
             </Text>
         </View>
           <View style={{ flex: 1, paddingRight: 30 }}>
-            <Text style={{ textAlign: 'right' }}>
+            <Text style={{ textAlign: 'right', color: 'green', fontWeight: 'bold'}}>
               R$ {this.props.comanda.totalPedidos}
             </Text>
           </View>
@@ -184,4 +205,4 @@ const mapStateToProps = (state) => {
   return { comanda: state.comanda };
 };
 
-export default connect(mapStateToProps, { pedidosConfirmadosFetch, postPedido })(Comanda);
+export default connect(mapStateToProps, { pedidosConfirmadosFetch, postPedido, finalizarComanda })(Comanda);

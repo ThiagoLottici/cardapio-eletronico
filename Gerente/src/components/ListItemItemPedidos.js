@@ -9,34 +9,40 @@ import { onCheckboxChange } from '../actions';
 class ListItemItemPedidos extends Component {
 
   componentWillMount() {
+    debugger;
   this.props;
 }
 
   render() {
-    const Item = this.props.ItemPedido.Item;
+    const Item = this.props.ItemPedido;
     return (
-      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-        <CheckBox
-          label=''
-          checked={this.props.ItemPedido.Checked}
-          onChange={() => this.props.onCheckboxChange(this.props.ItemPedido)}
-        />
-        <View style={{ alignSelf: 'stretch', flex: 1 }}>
-            <CardSection>
-             <View style={{ flexDirection: 'column' }}>
-              <Text style={{ fontWeight: 'bold' }}>
-                {Item.Nome} 
-              </Text>
-              <Text>
-                {Item.Obs}
-              </Text>
-             </View>
-            </CardSection>
+        <View style={styles.pedidosNaoConfirmadosStyle} accessible accessibilityLabel={Item.Nome}>
+         <View style={{ flex: 8 }}>
+            <Text>
+              {Item.Nome}
+            </Text>
+          </View>
+          <View style={{ flex: 2 }}>
+            <Text style={{ color: 'green' }}>
+              R$ {Item.Preco}
+            </Text>
+          </View>
         </View>
-      </View>
-    );
+      );
   }
 }
+
+const styles = {
+  pedidosNaoConfirmadosStyle: {
+    borderBottomWidth: 1,
+    padding: 5,
+    backgroundColor: '#fafafa',
+    justifyContent: 'flex-start',
+    flexDirection: 'row',
+    borderColor: '#ddd',
+    position: 'relative'
+  }
+};
 
 const mapStateToProps = state => {
   return state.pedidos;

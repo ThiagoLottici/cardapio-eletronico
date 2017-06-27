@@ -10,7 +10,22 @@ class ListItemPedidos extends Component {
   }
 
   onRowPress() {
-    Actions.itemPedidos({ Item: this.props.Item });
+    Actions.itemPedidos({ Pedidos: this.props.Item.Pedidos });
+  }
+
+  renderEncerrada() {
+    if (this.props.Item.Encerrada === false) {
+      return (
+          <Text style={{ color: 'green' }}>
+            Status: Aberta
+          </Text>
+        );
+    }
+      return (
+          <Text style={{ color: 'red' }}>
+            Status: Fechada
+          </Text>
+        )
   }
 
   render() {
@@ -18,14 +33,14 @@ class ListItemPedidos extends Component {
     const Item = this.props.Item;
     const Entrada = Item.DataEntrada;
     const IndexT = Entrada.indexOf("T");
-    const HoraEntrada = Entrada.substring(IndexT + 1, IndexT + 3 ) + 'h';
-    const MinEntrada = Entrada.substring(IndexT + 3, IndexT + 6) + 'min';
+    const HoraEntrada = Entrada.substring(IndexT + 2, IndexT + 3);
+    const MinEntrada = Entrada.substring(IndexT + 3, IndexT + 6);
     const comandaLabel = `Comanda#${Item.Id}`;
     return (
       <TouchableWithoutFeedback onPress={this.onRowPress.bind(this)}>
         <View style={styles.pedidosNaoConfirmadosStyle}>
-          <View style={{ flexDirection: 'column', flex: 0.5, paddingLeft: 5 }}>
-              <Text>
+          <View style={{ flexDirection: 'column', flex: 0.5, paddingLeft: 5}}>
+              <Text style={{ fontWeight: 'bold' }} >
                 {comandaLabel}
               </Text>
               <Text style={{ paddingTop: 10 }}>
@@ -37,7 +52,7 @@ class ListItemPedidos extends Component {
                 Entrada: { HoraEntrada }{MinEntrada} 
               </Text>
               <Text style={{ paddingTop: 10, color: 'green' }}>
-                TOTAL: R$ 10,00
+                {this.renderEncerrada()}
               </Text>
             </View>
         </View>

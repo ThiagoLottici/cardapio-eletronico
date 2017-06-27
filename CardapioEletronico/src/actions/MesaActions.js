@@ -39,6 +39,7 @@ export const selecionarMesaPost = (mesaNum) => {
     })
     .catch((error) => {
       //console.log(error);
+      debugger;
       selecionaMesaFail(dispatch, error);
     });
   };

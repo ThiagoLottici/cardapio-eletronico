@@ -22,7 +22,6 @@ class Pedidos extends Component {
   }
 
     componentWillReceiveProps(nextProps) {
-      debugger;
     this.createDataSource(nextProps);
       if (this.props.pedidos.messageBarPedidoFinalizado) {
         MessageBarManager.showAlert({
