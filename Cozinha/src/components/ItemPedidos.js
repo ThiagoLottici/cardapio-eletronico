@@ -8,6 +8,7 @@ const MessageBarManager = require('react-native-message-bar').MessageBarManager;
 class ItemPedidos extends Component {
 
   componentWillMount() { //this.props.Item
+
     this.props.setCheckedPropToItemPedido(this.props.Item.ItemPedidos);
     this.createDataSource(this.props.itemPedidos);
   }
@@ -39,6 +40,9 @@ class ItemPedidos extends Component {
   render() {
     return (
       <View>
+        <Text style={{ paddingLeft: 5, fontWeight: 'bold', paddingBottom: 10 }}>
+            Número da mesa: {this.props.Item.NumMesa}
+        </Text>
         <ListView
         enableEmptySections
         dataSource={this.dataSource}

@@ -15,6 +15,17 @@ class Pedidos extends Component {
     this.props.pedidosFetch();
   }
     this.createDataSource(this.props);
+    this.showConfirmMessage();
+  }
+
+  showConfirmMessage() {
+        if (this.props.pedidos.messageBarPedidoFinalizado) {
+        MessageBarManager.showAlert({
+        message: "Pedido finalizado com sucesso",
+        alertType: 'success'
+    });
+        this.props.setFalseMessageBar();
+      }
   }
 
   componentDidMount() {
@@ -22,15 +33,8 @@ class Pedidos extends Component {
   }
 
     componentWillReceiveProps(nextProps) {
-      debugger;
     this.createDataSource(nextProps);
-      if (this.props.pedidos.messageBarPedidoFinalizado) {
-        MessageBarManager.showAlert({
-        message: "Pedido finalizado com sucesso",
-        alertType: 'success'
-    });
-        this.props.setFalseMessageBar();
-      }
+     this.showConfirmMessage();
   }
 
   componentWillUnmount() {
@@ -61,7 +65,7 @@ class Pedidos extends Component {
     return (
     <TouchableWithoutFeedback onPress={this.atualizaPedidos.bind(this)}>
       <View style={{ height: 30 }}>
-        <Text>
+        <Text style={{ fontWeight: 'bold' }}>
           Há pedidos novos, clique aqui para atualizar
         </Text>
       </View>

@@ -15,6 +15,12 @@ export const pedidosFetch = () => {
   return (dispatch) => {
     axios.get('https://me-server.herokuapp.com/pedidos')
     .then(response => {
+      response.data.sort((a, b) => {
+        if (a.Id > b.Id) {
+          return 1;
+        }
+        return -1;
+      });
       dispatch({ type: PEDIDOS_CONFIRMADOS_FETCH_SUCCESS, payload: response.data });
     });
   };

@@ -28,7 +28,7 @@ class ListItemItemPedidos extends Component {
                 {Item.Nome} 
               </Text>
               <Text>
-                {Item.Obs}
+                {this.props.ItemPedido.Obs}
               </Text>
              </View>
             </CardSection>
