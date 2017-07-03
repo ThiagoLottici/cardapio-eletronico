@@ -37,6 +37,7 @@ const RouterComponent = () => {
         title="ITENS DO PEDIDO"
         navigationBarStyle={styles.navigationBarStyle} titleStyle={styles.titleStyle}
         component={ItemPedidos}
+        leftButtonIconStyle={styles.backButtonStyle}
       />
     </Router>
   );
@@ -49,6 +50,9 @@ const styles = StyleSheet.create({
   titleStyle: {
     color:'white',
     fontWeight: 'bold'
+  },
+    backButtonStyle: {
+    tintColor: 'orange'
   }
 });
 

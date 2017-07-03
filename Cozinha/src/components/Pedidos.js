@@ -63,9 +63,9 @@ class Pedidos extends Component {
   renderHaPedidosNovos() {
     if (this.props.pedidos.temPedidosNovos) {
     return (
-    <TouchableWithoutFeedback onPress={this.atualizaPedidos.bind(this)}>
-      <View style={{ height: 30 }}>
-        <Text style={{ fontWeight: 'bold' }}>
+    <TouchableWithoutFeedback style={styles.buttonStyle} onPress={this.atualizaPedidos.bind(this)}>
+      <View style={styles.buttonStyle}>
+        <Text style={styles.textStyle}>
           Há pedidos novos, clique aqui para atualizar
         </Text>
       </View>
@@ -94,6 +94,24 @@ class Pedidos extends Component {
     );
   }
 }
+
+const styles = {
+  textStyle: {
+    alignSelf: 'center',
+    color: 'white',
+    fontSize: 12,
+    fontWeight: '600',
+  },
+  buttonStyle: {
+    height:30,
+    alignSelf: 'stretch',
+    backgroundColor: 'orange',
+    borderRadius: 5,
+    borderWidth: 1,
+    borderColor: '#B78521',
+    paddingTop: 5
+  }
+};
 
 const mapStateToProps = (state) => {
   return { pedidos: state.pedidos };

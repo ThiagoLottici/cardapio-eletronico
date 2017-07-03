@@ -48,7 +48,7 @@ const RouterComponent = () => {
             icon={TabIcon}
          >
           <Scene key="cardapio" component={Cardapio} title="CARDÁPIO" initial navigationBarStyle={ styles.navigationBarStyle} titleStyle={styles.titleStyle} />
-          <Scene key="dishDetail" component={DetalhesPedido} title="DETALHES DO PRATO" navigationBarStyle={ styles.navigationBarStyle} titleStyle={styles.titleStyle} />
+          <Scene key="dishDetail" component={DetalhesPedido} title="DETALHES DO PRATO" navigationBarStyle={ styles.navigationBarStyle} titleStyle={styles.titleStyle} leftButtonIconStyle={styles.backButtonStyle}/>
          </Scene>
          <Scene
             key="comandaScene"
@@ -82,6 +82,9 @@ const styles = StyleSheet.create({
   titleStyle: {
     color:'white',
     fontWeight: 'bold'
+  },
+      backButtonStyle: {
+    tintColor: 'orange'
   }
 });
 

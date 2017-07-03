@@ -29,7 +29,6 @@ class ListItemPedidos extends Component {
   }
 
   render() {
-    debugger;
     const Item = this.props.Item;
     const Entrada = Item.DataEntrada;
     const IndexT = Entrada.indexOf("T");
@@ -39,7 +38,7 @@ class ListItemPedidos extends Component {
     return (
       <TouchableWithoutFeedback onPress={this.onRowPress.bind(this)}>
         <View style={styles.pedidosNaoConfirmadosStyle}>
-          <View style={{ flexDirection: 'column', flex: 0.5, paddingLeft: 5}}>
+          <View style={{ flexDirection: 'column', flex: 0.5, paddingLeft: 5 }}>
               <Text style={{ fontWeight: 'bold' }} >
                 {comandaLabel}
               </Text>
