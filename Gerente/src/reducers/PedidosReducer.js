@@ -35,7 +35,7 @@ export default (state = INITIAL_STATE, action) => {
       case FIRST_CONNECTION:
         return { ...state, firstConnection: false };
       case ATUALIZA_VALOR_COMANDA:
-        return { ...state, totalPedidos: action.payload };
+        return { ...state, totalPedidos: parseFloat(action.payload).toFixed(2) };
     default:
       return state;
   }
